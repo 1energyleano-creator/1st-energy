@@ -89,6 +89,47 @@ const flowSteps = [
 
 const regions = ['South Africa', 'Namibia', 'Botswana', 'Zimbabwe', 'Zambia', 'Mozambique', 'Eswatini']
 
+const heroSlides = [
+  {
+    tone: 'photo',
+    number: '01',
+    caption: 'Built for the long haul',
+  },
+  {
+    tone: 'orange',
+    number: '02',
+    icon: Fuel,
+    eyebrow: 'Running on empty?',
+    headline: 'Out of gas?',
+    sub: "Don't wait around — order a refill and we'll deliver it straight to your door.",
+    cta: 'Order now',
+    href: '#services',
+    caption: 'Never run dry again',
+  },
+  {
+    tone: 'dark',
+    number: '03',
+    icon: Zap,
+    eyebrow: 'Stranded on the road?',
+    headline: 'Need emergency fuel?',
+    sub: "Tell us where you are and we'll dispatch a driver to get you moving again.",
+    cta: 'Order now',
+    href: '#services',
+    caption: '24/7 emergency response',
+  },
+  {
+    tone: 'green',
+    number: '04',
+    icon: UserPlus,
+    eyebrow: 'Earn on your own schedule',
+    headline: 'Drive. Deliver. Earn.',
+    sub: 'Sign up as a 1st Energy driver and start making money on every delivery.',
+    cta: 'Download the app',
+    href: '#playstore',
+    caption: 'Now recruiting drivers',
+  },
+]
+
 function PlayStoreIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -111,6 +152,16 @@ export default function Page() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [showBanner, setShowBanner] = useState(true)
+  const [activeSlide, setActiveSlide] = useState(0)
+  const [slidePaused, setSlidePaused] = useState(false)
+
+  useEffect(() => {
+    if (slidePaused) return
+    const timer = setInterval(() => {
+      setActiveSlide((current) => (current + 1) % heroSlides.length)
+    }, 4800)
+    return () => clearInterval(timer)
+  }, [slidePaused])
 
   useEffect(() => {
     const revealEls = Array.from(document.querySelectorAll('.reveal'))
@@ -182,10 +233,57 @@ export default function Page() {
               <span><MapPin aria-hidden="true" /> 7 countries</span>
             </div>
           </div>
-          <div className="hero-visual hero-anim" style={{ animationDelay: '200ms' }}>
+          <div
+            className="hero-visual hero-anim"
+            style={{ animationDelay: '200ms' }}
+            onMouseEnter={() => setSlidePaused(true)}
+            onMouseLeave={() => setSlidePaused(false)}
+          >
             <div className="visual-frame float-slow">
-              <div className="visual-photo" role="img" aria-label="Fuel tanker travelling through the Southern African landscape" />
-              <div className="visual-caption"><span>01</span><span>Built for the long haul</span></div>
+              <div className="visual-photo">
+                {heroSlides.map((slide, index) => {
+                  const isActive = index === activeSlide
+                  if (slide.tone === 'photo') {
+                    return (
+                      <div
+                        key={slide.number}
+                        className={`hero-slide hero-slide-photo ${isActive ? 'is-active' : ''}`}
+                        role="img"
+                        aria-label="Fuel tanker travelling through the Southern African landscape"
+                        aria-hidden={!isActive}
+                      />
+                    )
+                  }
+                  const Icon = slide.icon!
+                  return (
+                    <div
+                      key={slide.number}
+                      className={`hero-slide hero-slide-promo tone-${slide.tone} ${isActive ? 'is-active' : ''}`}
+                      aria-hidden={!isActive}
+                    >
+                      <Icon className="hero-slide-icon" aria-hidden="true" />
+                      <div className="hero-slide-copy">
+                        <span className="hero-slide-eyebrow">{slide.eyebrow}</span>
+                        <h3>{slide.headline}</h3>
+                        <p>{slide.sub}</p>
+                        <a className="hero-slide-cta" href={slide.href}>{slide.cta} <ArrowRight aria-hidden="true" /></a>
+                      </div>
+                    </div>
+                  )
+                })}
+                <div className="hero-slide-dots">
+                  {heroSlides.map((slide, index) => (
+                    <button
+                      key={slide.number}
+                      type="button"
+                      className={`hero-slide-dot ${index === activeSlide ? 'is-active' : ''}`}
+                      aria-label={`Show slide ${index + 1}: ${slide.caption}`}
+                      onClick={() => setActiveSlide(index)}
+                    />
+                  ))}
+                </div>
+              </div>
+              <div className="visual-caption"><span>{heroSlides[activeSlide].number}</span><span>{heroSlides[activeSlide].caption}</span></div>
             </div>
             <div className="location-card float-slow-delayed"><span className="live-dot" /><div><strong>Live in 7 countries</strong><small>Southern Africa, connected</small></div><ArrowRight aria-hidden="true" /></div>
           </div>
