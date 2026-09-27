@@ -151,6 +151,121 @@ function PlayStoreIcon() {
   )
 }
 
+function GasCanisterScene() {
+  return (
+    <svg className="hero-slide-scene" viewBox="0 0 400 330" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+      {[...Array(14)].map((_, i) => (
+        <circle key={i} cx={(i * 71 + 30) % 380 + 10} cy={(i * 53 + 20) % 150 + 10} r={i % 3 === 0 ? 2.4 : 1.4} fill="#ffffff" opacity={i % 2 === 0 ? 0.35 : 0.18} />
+      ))}
+      <ellipse cx="230" cy="292" rx="120" ry="16" fill="#000000" opacity="0.16" />
+      <circle cx="300" cy="70" r="46" fill="#ffffff" opacity="0.1" />
+      <circle cx="300" cy="70" r="46" fill="none" stroke="#ffffff" strokeOpacity="0.35" strokeWidth="1.5" />
+      <path d="M292 55 L296 78 L286 78 L296 92 L316 65 L304 65 L312 55 Z" fill="#ffffff" opacity="0.9" />
+      <rect x="176" y="118" width="108" height="150" rx="18" fill="#ffffff" opacity="0.92" />
+      <rect x="176" y="118" width="54" height="150" rx="18" fill="#ffffff" opacity="0.12" />
+      <rect x="204" y="92" width="52" height="30" rx="8" fill="#ffffff" opacity="0.92" />
+      <circle cx="230" cy="88" r="9" fill="#ffffff" opacity="0.92" />
+      <rect x="188" y="160" width="84" height="6" rx="3" fill="#000000" opacity="0.12" />
+      <rect x="188" y="182" width="84" height="6" rx="3" fill="#000000" opacity="0.12" />
+      <circle cx="140" cy="200" r="44" fill="#141414" opacity="0.28" />
+      <circle cx="140" cy="200" r="44" fill="none" stroke="#ffffff" strokeOpacity="0.55" strokeWidth="2" />
+      {[...Array(9)].map((_, i) => {
+        const angle = (Math.PI * (0.75 + (i / 8) * 1.5))
+        const x1 = 140 + Math.cos(angle) * 34
+        const y1 = 200 + Math.sin(angle) * 34
+        const x2 = 140 + Math.cos(angle) * 40
+        const y2 = 200 + Math.sin(angle) * 40
+        return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#ffffff" strokeOpacity="0.5" strokeWidth="2" />
+      })}
+      <line x1="140" y1="200" x2="118" y2="212" stroke="#ffffff" strokeWidth="3" strokeLinecap="round" />
+      <circle cx="140" cy="200" r="4" fill="#ffffff" />
+      <text x="112" y="235" fontFamily="DM Mono, monospace" fontSize="10" fill="#ffffff" opacity="0.7">E</text>
+      <text x="163" y="235" fontFamily="DM Mono, monospace" fontSize="10" fill="#ffffff" opacity="0.7">F</text>
+    </svg>
+  )
+}
+
+function RoadsideScene() {
+  return (
+    <svg className="hero-slide-scene" viewBox="0 0 400 330" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+      {[...Array(16)].map((_, i) => (
+        <circle key={i} cx={(i * 61 + 20) % 390} cy={(i * 37 + 10) % 140 + 6} r={i % 4 === 0 ? 1.8 : 1.1} fill="#ffffff" opacity={i % 3 === 0 ? 0.5 : 0.22} />
+      ))}
+      <circle cx="90" cy="60" r="34" fill="#ffffff" opacity="0.08" />
+      <path d="M40 300 C160 250 260 250 380 300" stroke="#ffffff" strokeOpacity="0.55" strokeWidth="3" fill="none" />
+      <path d="M40 300 C160 250 260 250 380 300" stroke="#ffffff" strokeOpacity="0.9" strokeWidth="2" strokeDasharray="10 10" fill="none" />
+      <ellipse cx="270" cy="272" rx="88" ry="14" fill="#000000" opacity="0.25" />
+      <g>
+        <rect x="205" y="205" width="130" height="48" rx="14" fill="#ffffff" opacity="0.94" />
+        <path d="M222 205 L245 178 L295 178 L318 205 Z" fill="#ffffff" opacity="0.94" />
+        <rect x="253" y="185" width="34" height="16" rx="3" fill="#000000" opacity="0.18" />
+        <circle cx="232" cy="256" r="17" fill="#141414" opacity="0.55" />
+        <circle cx="232" cy="256" r="17" fill="none" stroke="#ffffff" strokeOpacity="0.6" strokeWidth="2" />
+        <circle cx="308" cy="256" r="17" fill="#141414" opacity="0.55" />
+        <circle cx="308" cy="256" r="17" fill="none" stroke="#ffffff" strokeOpacity="0.6" strokeWidth="2" />
+        <rect x="330" y="220" width="10" height="8" rx="2" fill="#ffe9a8" opacity="0.9" />
+      </g>
+      <g transform="translate(255,140)">
+        <path d="M0 -22 L20 14 L-20 14 Z" fill="#ffffff" opacity="0.95" />
+        <rect x="-2.5" y="-8" width="5" height="12" rx="2" fill="#c94f1e" />
+        <circle cx="0" cy="8" r="2.4" fill="#c94f1e" />
+      </g>
+      <g transform="translate(88,70)">
+        <circle r="20" fill="#ffffff" opacity="0.18" className="hero-scene-pulse" />
+        <path d="M0 -18 C11 -18 18 -10 18 0 C18 13 0 30 0 30 C0 30 -18 13 -18 0 C-18 -10 -11 -18 0 -18 Z" fill="#ffffff" opacity="0.95" />
+        <circle cx="0" cy="-1" r="6" fill="#141c1f" opacity="0.6" />
+      </g>
+      <path d="M96 88 C140 120 190 150 226 168" stroke="#ffffff" strokeOpacity="0.5" strokeWidth="2" strokeDasharray="6 8" fill="none" />
+    </svg>
+  )
+}
+
+function DriverScene() {
+  return (
+    <svg className="hero-slide-scene" viewBox="0 0 400 330" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+      {[...Array(6)].map((_, i) => (
+        <g key={i} transform={`translate(${300 + (i % 3) * 22} ${40 + Math.floor(i / 3) * 26})`}>
+          <path d="M0 -6 L1.6 -1.6 L6 0 L1.6 1.6 L0 6 L-1.6 1.6 L-6 0 L-1.6 -1.6 Z" fill="#ffffff" opacity="0.55" />
+        </g>
+      ))}
+      <path d="M20 300 C150 260 260 260 385 300" stroke="#ffffff" strokeOpacity="0.5" strokeWidth="3" fill="none" />
+      <ellipse cx="205" cy="278" rx="95" ry="14" fill="#000000" opacity="0.22" />
+      <g transform="translate(70,60)">
+        <rect x="-38" y="-46" width="76" height="112" rx="12" fill="#ffffff" opacity="0.16" />
+        <rect x="-38" y="-46" width="76" height="112" rx="12" fill="none" stroke="#ffffff" strokeOpacity="0.4" strokeWidth="1.5" />
+        <rect x="-26" y="-30" width="52" height="8" rx="4" fill="#ffffff" opacity="0.55" />
+        <circle cx="-8" cy="10" r="22" fill="none" stroke="#ffffff" strokeOpacity="0.55" strokeWidth="1.5" />
+        <path d="M-8 10 L2 -2" stroke="#ffffff" strokeOpacity="0.8" strokeWidth="2" strokeLinecap="round" />
+        <circle cx="2" cy="-2" r="3" fill="#ffffff" />
+        <rect x="-24" y="40" width="48" height="7" rx="3.5" fill="#ffffff" opacity="0.4" />
+      </g>
+      <g transform="translate(215,150)">
+        <circle cx="-55" cy="95" r="24" fill="#141c1f" opacity="0.5" />
+        <circle cx="-55" cy="95" r="24" fill="none" stroke="#ffffff" strokeOpacity="0.6" strokeWidth="2.5" />
+        <circle cx="55" cy="95" r="24" fill="#141c1f" opacity="0.5" />
+        <circle cx="55" cy="95" r="24" fill="none" stroke="#ffffff" strokeOpacity="0.6" strokeWidth="2.5" />
+        <path d="M-55 95 L-20 95 L5 45 L45 45" stroke="#ffffff" strokeOpacity="0.85" strokeWidth="5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M55 95 L55 60 L20 60" stroke="#ffffff" strokeOpacity="0.85" strokeWidth="5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+        <rect x="18" y="18" width="42" height="34" rx="6" fill="#ffffff" opacity="0.94" />
+        <rect x="26" y="4" width="26" height="16" rx="4" fill="#ffffff" opacity="0.94" />
+        <circle cx="5" cy="40" r="16" fill="#ffffff" opacity="0.94" />
+        <path d="M-3 40 Q5 22 13 40" fill="none" stroke="#141c1f" strokeOpacity="0.5" strokeWidth="3" strokeLinecap="round" />
+      </g>
+      <g transform="translate(320,120)">
+        <circle r="20" fill="#ffe9a8" opacity="0.95" />
+        <circle r="20" fill="none" stroke="#ffffff" strokeOpacity="0.7" strokeWidth="1.5" />
+        <text x="0" y="5" fontFamily="Manrope, sans-serif" fontSize="16" fontWeight="800" fill="#8a6a12" textAnchor="middle">$</text>
+      </g>
+      <g transform="translate(348,168)">
+        <circle r="13" fill="#ffe9a8" opacity="0.9" />
+        <text x="0" y="4" fontFamily="Manrope, sans-serif" fontSize="11" fontWeight="800" fill="#8a6a12" textAnchor="middle">$</text>
+      </g>
+    </svg>
+  )
+}
+
+const heroScenes = { orange: GasCanisterScene, dark: RoadsideScene, green: DriverScene } as const
+
 export default function Page() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [submitted, setSubmitted] = useState(false)
@@ -257,18 +372,17 @@ export default function Page() {
                       />
                     )
                   }
-                  const Icon = slide.icon!
+                  const Scene = heroScenes[slide.tone as keyof typeof heroScenes]
                   return (
                     <div
                       key={slide.number}
                       className={`hero-slide hero-slide-promo tone-${slide.tone} ${isActive ? 'is-active' : ''}`}
                       aria-hidden={!isActive}
                     >
-                      <span className="hero-slide-pattern" aria-hidden="true" />
+                      <Scene />
+                      <span className="hero-slide-scrim" aria-hidden="true" />
                       <span className="hero-slide-ghost-number" aria-hidden="true">{slide.number}</span>
-                      <span className="hero-slide-glow" aria-hidden="true" />
                       <div className="hero-slide-copy">
-                        <span className="hero-slide-icon-badge"><Icon className="hero-slide-icon" aria-hidden="true" /></span>
                         <span className="hero-slide-eyebrow">{slide.eyebrow}</span>
                         <h3>{slide.headline}</h3>
                         <p>{slide.sub}</p>
