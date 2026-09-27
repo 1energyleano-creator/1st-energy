@@ -456,6 +456,7 @@ export default function Page() {
       </section>
 
       <section className="service-intro" id="services">
+        <div className="container"><a className="services-banner" href="#playstore" aria-label="Get the 1st Energy app"><img src="/services-banner.jpg" alt="Fuel and gas delivered when you need it: driver refuelling a car at night" loading="lazy" /></a></div>
         <div className="container section-heading"><div><p className="eyebrow">Our services</p><h2>More than just delivery.</h2></div><p>1st Energy connects you with approved suppliers and drivers for gas, fuel and emergency services.</p></div>
         <div className="container service-grid">{services.map(({ icon: Icon, title, description, link, photo, photoAlt, photoPosition }, index) => { return <article className="service-card reveal" style={{ transitionDelay: `${index * 100}ms` }} key={title}><div className="service-visual"><img src={photo} alt={photoAlt} loading="lazy" style={{ objectPosition: photoPosition }} /></div><div className="service-number">0{index + 1}</div><Icon className="service-icon" aria-hidden="true" /><h3>{title}</h3><p>{description}</p><a href="#quote">{link} <ArrowRight aria-hidden="true" /></a></article> })}</div>
       </section>

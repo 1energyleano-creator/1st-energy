@@ -310,3 +310,6 @@ a { color:inherit; text-decoration:none; }
   .top-banner-text{white-space:normal;font-size:10px;text-align:center}
   .top-banner-cta{font-size:9px}
 }
+
+.services-banner { display:block; margin-bottom:56px; overflow:hidden; } .services-banner img { display:block; width:100%; height:auto; transition:transform .6s cubic-bezier(.16,1,.3,1); } .services-banner:hover img { transform:scale(1.02); }
+@media (max-width:800px) { .services-banner { margin-bottom:36px; } .services-banner img { min-height:230px; object-fit:cover; object-position:left center; } }
