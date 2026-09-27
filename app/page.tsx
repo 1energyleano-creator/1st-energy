@@ -40,18 +40,27 @@ const services = [
   {
     icon: Flame,
     title: 'LPG gas delivery',
+    photo: '/service-lpg.jpg',
+    photoAlt: '1st Energy driver delivering an LPG gas cylinder to a home',
+    photoPosition: 'center 22%',
     description: 'Booking and ordering your gas made easy — refill or new cylinder, delivered fast.',
     link: 'Order gas',
   },
   {
     icon: Fuel,
     title: 'Fuel delivery',
+    photo: '/service-fuel.jpg',
+    photoAlt: 'Fuel being poured from a canister into a car',
+    photoPosition: 'center 55%',
     description: 'Never run out of fuel again — petrol, diesel and paraffin dropped where you need it.',
     link: 'Order fuel',
   },
   {
     icon: Truck,
     title: 'Emergency fuel assistance',
+    photo: '/service-emergency.jpg',
+    photoAlt: 'Driver refuelling a stranded car at night',
+    photoPosition: 'center 40%',
     description: 'Stranded on the road? Get emergency fuel delivered straight to your location.',
     link: 'Request assistance',
   },
@@ -265,7 +274,27 @@ function DriverScene() {
   )
 }
 
+function StorefrontScene() {
+  return (
+    <svg className="hero-slide-scene" viewBox="0 0 400 330" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+      <ellipse cx="200" cy="268" rx="150" ry="16" fill="#000000" opacity="0.18" />
+      <rect x="90" y="120" width="220" height="140" rx="6" fill="#ffffff" opacity="0.14" />
+      <rect x="90" y="120" width="220" height="140" rx="6" fill="none" stroke="#ffffff" strokeOpacity="0.4" strokeWidth="1.5" />
+      <path d="M78 122 L92 78 L308 78 L322 122 Z" fill="#ffffff" opacity="0.92" />
+      {[...Array(6)].map((_, i) => (
+        <rect key={i} x={92 + i * 37} y="122" width="34" height="14" fill={i % 2 === 0 ? '#f26b35' : '#ffffff'} opacity={i % 2 === 0 ? 0.9 : 0.92} />
+      ))}
+      <rect x="120" y="170" width="160" height="90" rx="4" fill="#141c1f" opacity="0.25" />
+      <rect x="140" y="186" width="44" height="58" rx="3" fill="#ffffff" opacity="0.85" />
+      <rect x="196" y="186" width="44" height="58" rx="3" fill="#ffffff" opacity="0.7" />
+      <rect x="252" y="186" width="20" height="58" rx="3" fill="#ffffff" opacity="0.55" />
+      <circle cx="200" cy="98" r="12" fill="#ffe9a8" opacity="0.92" />
+    </svg>
+  )
+}
+
 const heroScenes = { orange: GasCanisterScene, dark: RoadsideScene, green: DriverScene } as const
+
 
 export default function Page() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -418,9 +447,17 @@ export default function Page() {
         <div className="container feature-grid">{whyChoose.map(({ icon: Icon, title, description }, index) => <div className="feature-card reveal" style={{ transitionDelay: `${(index % 3) * 90}ms` }} key={title}><Icon className="feature-icon" aria-hidden="true" /><h3>{title}</h3><p>{description}</p></div>)}</div>
       </section>
 
+      <section className="photo-band reveal">
+        <div className="photo-band-image" role="img" aria-label="1st Energy fuel tanker on the road in Southern Africa" />
+        <div className="container photo-band-inner">
+          <span className="photo-band-tag"><Truck aria-hidden="true" /> On the road, every day</span>
+          <p>Our fleet keeps moving across Southern Africa so your delivery arrives when you need it — not when it's convenient for us.</p>
+        </div>
+      </section>
+
       <section className="service-intro" id="services">
         <div className="container section-heading"><div><p className="eyebrow">Our services</p><h2>More than just delivery.</h2></div><p>1st Energy connects you with approved suppliers and drivers for gas, fuel and emergency services.</p></div>
-        <div className="container service-grid">{services.map(({ icon: Icon, title, description, link }, index) => <article className="service-card reveal" style={{ transitionDelay: `${index * 100}ms` }} key={title}><div className="service-number">0{index + 1}</div><Icon className="service-icon" aria-hidden="true" /><h3>{title}</h3><p>{description}</p><a href="#quote">{link} <ArrowRight aria-hidden="true" /></a></article>)}</div>
+        <div className="container service-grid">{services.map(({ icon: Icon, title, description, link, photo, photoAlt, photoPosition }, index) => { return <article className="service-card reveal" style={{ transitionDelay: `${index * 100}ms` }} key={title}><div className="service-visual"><img src={photo} alt={photoAlt} loading="lazy" style={{ objectPosition: photoPosition }} /></div><div className="service-number">0{index + 1}</div><Icon className="service-icon" aria-hidden="true" /><h3>{title}</h3><p>{description}</p><a href="#quote">{link} <ArrowRight aria-hidden="true" /></a></article> })}</div>
       </section>
 
       <section className="products-section">
@@ -439,8 +476,8 @@ export default function Page() {
 
       <section className="cta-section">
         <div className="container cta-grid">
-          <div className="cta-card reveal"><Truck className="cta-icon" aria-hidden="true" /><h3>Turn your vehicle into an opportunity</h3><p>Join 1st Energy as a driver and start earning by delivering gas and fuel in your area.</p><ul className="cta-list"><li><Check aria-hidden="true" /> Flexible working hours</li><li><Check aria-hidden="true" /> Weekly payouts</li><li><Check aria-hidden="true" /> Full driver support</li></ul><a className="button button-dark" href="#quote">Become a driver <ArrowRight aria-hidden="true" /></a></div>
-          <div className="cta-card reveal" style={{ transitionDelay: '100ms' }}><Store className="cta-icon" aria-hidden="true" /><h3>Take your products to more customers</h3><p>List your gas, fuel or accessories on 1st Energy and reach customers across your region.</p><ul className="cta-list"><li><Check aria-hidden="true" /> Real-time orders</li><li><Check aria-hidden="true" /> Simple vendor dashboard</li><li><Check aria-hidden="true" /> Secure payouts</li></ul><a className="button button-dark" href="#quote">Become a vendor <ArrowRight aria-hidden="true" /></a></div>
+          <div className="cta-card reveal"><div className="cta-visual tone-green"><DriverScene /></div><Truck className="cta-icon" aria-hidden="true" /><h3>Turn your vehicle into an opportunity</h3><p>Join 1st Energy as a driver and start earning by delivering gas and fuel in your area.</p><ul className="cta-list"><li><Check aria-hidden="true" /> Flexible working hours</li><li><Check aria-hidden="true" /> Weekly payouts</li><li><Check aria-hidden="true" /> Full driver support</li></ul><a className="button button-dark" href="#quote">Become a driver <ArrowRight aria-hidden="true" /></a></div>
+          <div className="cta-card reveal" style={{ transitionDelay: '100ms' }}><div className="cta-visual tone-orange"><StorefrontScene /></div><Store className="cta-icon" aria-hidden="true" /><h3>Take your products to more customers</h3><p>List your gas, fuel or accessories on 1st Energy and reach customers across your region.</p><ul className="cta-list"><li><Check aria-hidden="true" /> Real-time orders</li><li><Check aria-hidden="true" /> Simple vendor dashboard</li><li><Check aria-hidden="true" /> Secure payouts</li></ul><a className="button button-dark" href="#quote">Become a vendor <ArrowRight aria-hidden="true" /></a></div>
         </div>
       </section>
 
