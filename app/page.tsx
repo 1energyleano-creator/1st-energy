@@ -1,0 +1,200 @@
+'use client'
+
+import { useState } from 'react'
+import {
+  ArrowRight,
+  Check,
+  Clock3,
+  CreditCard,
+  Fuel,
+  Headphones,
+  Menu,
+  MapPin,
+  Navigation,
+  Phone,
+  ShieldCheck,
+  Smartphone,
+  Truck,
+  X,
+  Zap,
+  Flame,
+  Droplet,
+  Wrench,
+  UserPlus,
+  ClipboardList,
+  Route,
+  PackageCheck,
+  Store,
+} from 'lucide-react'
+
+const services = [
+  {
+    icon: Flame,
+    title: 'LPG gas delivery',
+    description: 'Booking and ordering your gas made easy — refill or new cylinder, delivered fast.',
+    link: 'Order gas',
+  },
+  {
+    icon: Fuel,
+    title: 'Fuel delivery',
+    description: 'Never run out of fuel again — petrol, diesel and paraffin dropped where you need it.',
+    link: 'Order fuel',
+  },
+  {
+    icon: Truck,
+    title: 'Emergency fuel assistance',
+    description: 'Stranded on the road? Get emergency fuel delivered straight to your location.',
+    link: 'Request assistance',
+  },
+]
+
+const whyChoose = [
+  { icon: MapPin, title: 'Live order tracking', description: 'Watch your order come to you in real time, from confirmation to doorstep.' },
+  { icon: ShieldCheck, title: 'Trusted suppliers', description: 'Every gas and fuel supplier on 1st Energy is vetted and approved.' },
+  { icon: Zap, title: 'Fast delivery', description: 'Simple ordering that gets your fuel or gas to you when you need it.' },
+  { icon: CreditCard, title: 'Cash or card', description: 'Pay however suits you, safely and securely, every time.' },
+  { icon: Smartphone, title: 'Fully automated', description: 'Order, pay and track it all from the app, wherever you are.' },
+  { icon: Headphones, title: 'Fully supported', description: 'Our team is on hand around the clock if anything needs sorting.' },
+]
+
+const products = [
+  { icon: Flame, name: 'LP gas', tagline: '9kg · 14kg · 19kg' },
+  { icon: Fuel, name: 'Petrol', tagline: '93 · 95 unleaded' },
+  { icon: Droplet, name: 'Diesel', tagline: '50ppm · 500ppm' },
+  { icon: Wrench, name: 'Accessories', tagline: 'Regulators & hoses' },
+]
+
+const orderSteps = [
+  { icon: UserPlus, title: 'Register', description: "Create your account and set up your delivery address in minutes." },
+  { icon: ClipboardList, title: 'Choose product', description: 'Pick gas, fuel or an accessory from a trusted local supplier.' },
+  { icon: MapPin, title: 'Share your location', description: 'Confirm exactly where you are so your order is dropped in the right place.' },
+  { icon: Route, title: 'Track your delivery', description: 'Follow your driver in real time from confirmation to arrival.' },
+  { icon: PackageCheck, title: 'Receive your order', description: 'Get your products safely and pay by cash or card at the door.' },
+]
+
+const flowSteps = [
+  { title: 'Customer', description: 'Orders through the app' },
+  { title: '1st Energy', description: 'Connects order to a vendor' },
+  { title: 'Vendor', description: 'Accepts and dispatches order' },
+  { title: 'Delivery', description: 'Arrives at their location' },
+]
+
+const regions = ['South Africa', 'Namibia', 'Botswana', 'Zimbabwe', 'Zambia', 'Mozambique', 'Eswatini']
+
+function PlayStoreIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <defs>
+        <clipPath id="play-triangle">
+          <path d="M4 3.2C4 2.2 5.1 1.6 5.9 2.1L20.5 11c.7.4.7 1.5 0 2L5.9 21.9c-.8.5-1.9-.1-1.9-1.1V3.2Z" />
+        </clipPath>
+      </defs>
+      <g clipPath="url(#play-triangle)">
+        <rect x="0" y="0" width="24" height="8.6" fill="#00D2FF" />
+        <rect x="0" y="8.6" width="24" height="2.4" fill="#FF3D57" />
+        <rect x="0" y="11" width="24" height="2.4" fill="#FFC900" />
+        <rect x="0" y="13.4" width="24" height="10.6" fill="#3BD671" />
+      </g>
+    </svg>
+  )
+}
+
+export default function Page() {
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
+
+  return (
+    <main>
+      <header className="site-header">
+        <div className="container header-inner">
+          <a href="#top" className="brand" aria-label="1st Energy home">
+            <span className="brand-lockup"><img src="/icon.svg" alt="" className="brand-logo brand-mark-image" /><span>1st Energy</span></span>
+          </a>
+          <nav className={`main-nav ${menuOpen ? 'is-open' : ''}`} aria-label="Primary navigation">
+            <a href="#services" onClick={() => setMenuOpen(false)}>Services</a>
+            <a href="#how-it-works" onClick={() => setMenuOpen(false)}>How it works</a>
+            <a href="#coverage" onClick={() => setMenuOpen(false)}>Coverage</a>
+            <a href="#about" onClick={() => setMenuOpen(false)}>About us</a>
+            <a className="mobile-cta" href="/operations" onClick={() => setMenuOpen(false)}>Operations <ArrowRight aria-hidden="true" /></a>
+          </nav>
+          <div className="header-actions">
+            <a className="phone-link" href="tel:+27870011234"><Phone aria-hidden="true" /> 087 001 1234</a>
+            <a className="button button-dark header-cta" href="/operations">Operations <ArrowRight aria-hidden="true" /></a>
+            <button className="menu-toggle" aria-label={menuOpen ? 'Close menu' : 'Open menu'} onClick={() => setMenuOpen(!menuOpen)}>
+              {menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <section className="hero" id="top">
+        <div className="hero-grid" aria-hidden="true" />
+        <div className="container hero-inner">
+          <div className="hero-copy">
+            <p className="eyebrow"><span className="eyebrow-line" /> Fuel &amp; gas delivery app</p>
+            <h1>Fuel &amp; gas delivered.<br /><em>When you</em> need it.</h1>
+            <p className="hero-lead">Your trusted marketplace for LP gas, fuel and emergency delivery — ordered from your phone, delivered to your door.</p>
+            <div className="hero-actions">
+              <a className="button button-orange" href="#playstore"><PlayStoreIcon /> Get it on Playstore</a>
+              <a className="text-link" href="#how-it-works">How it works <span>↗</span></a>
+            </div>
+            <div className="trust-row">
+              <span><ShieldCheck aria-hidden="true" /> Verified suppliers</span>
+              <span><Clock3 aria-hidden="true" /> 24/7 response</span>
+              <span><MapPin aria-hidden="true" /> 7 countries</span>
+            </div>
+          </div>
+          <div className="hero-visual">
+            <div className="visual-frame">
+              <div className="visual-photo" role="img" aria-label="Fuel tanker travelling through the Southern African landscape" />
+              <div className="visual-caption"><span>01</span><span>Built for the long haul</span></div>
+            </div>
+            <div className="location-card"><span className="live-dot" /><div><strong>Live in 7 countries</strong><small>Southern Africa, connected</small></div><ArrowRight aria-hidden="true" /></div>
+          </div>
+        </div>
+        <div className="container hero-foot"><span>Trusted by households, businesses and drivers who can&apos;t afford to stop.</span><span className="scroll-note">Scroll to explore <span>↓</span></span></div>
+      </section>
+
+      <section className="feature-section" id="why-us">
+        <div className="container section-heading"><div><p className="eyebrow">Why choose 1st Energy</p><h2>Simple. Fast.<br /><em>Reliable.</em></h2></div><p>No more waiting in line or running out at the worst moment — order gas or fuel delivery straight from the app, wherever you are.</p></div>
+        <div className="container feature-grid">{whyChoose.map(({ icon: Icon, title, description }) => <div className="feature-card" key={title}><Icon className="feature-icon" aria-hidden="true" /><h3>{title}</h3><p>{description}</p></div>)}</div>
+      </section>
+
+      <section className="service-intro" id="services">
+        <div className="container section-heading"><div><p className="eyebrow">Our services</p><h2>More than just delivery.</h2></div><p>1st Energy connects you with approved suppliers and drivers for gas, fuel and emergency services.</p></div>
+        <div className="container service-grid">{services.map(({ icon: Icon, title, description, link }, index) => <article className="service-card" key={title}><div className="service-number">0{index + 1}</div><Icon className="service-icon" aria-hidden="true" /><h3>{title}</h3><p>{description}</p><a href="#quote">{link} <ArrowRight aria-hidden="true" /></a></article>)}</div>
+      </section>
+
+      <section className="products-section">
+        <div className="container section-heading"><div><p className="eyebrow">Our products</p><h2>Everything you need,<br /><em>in one place.</em></h2></div><p>From cooking gas to fuel and accessories, 1st Energy gives you access to a wide range of energy products from trusted sellers.</p></div>
+        <div className="container products-grid">{products.map(({ icon: Icon, name, tagline }) => <div className="product-card" key={name}><Icon className="product-icon" aria-hidden="true" /><h3>{name}</h3><span>{tagline}</span></div>)}</div>
+      </section>
+
+      <section className="order-section" id="how-it-works"><span id="operations" className="section-anchor" aria-hidden="true" />
+        <div className="container section-heading light"><div><p className="eyebrow eyebrow-light">How to order</p><h2>From your phone<br /><em>to your door.</em></h2></div><p className="order-copy">Ordering is simple and quick, just a few taps to get your energy on the way.</p></div>
+        <div className="container order-steps">{orderSteps.map(({ icon: Icon, title, description }, index) => <div className="order-step" key={title}><span className="order-step-number">0{index + 1}</span><Icon className="order-step-icon" aria-hidden="true" /><h3>{title}</h3><p>{description}</p></div>)}</div>
+      </section>
+
+      <section className="dark-section">
+        <div className="container dark-grid"><div><p className="eyebrow eyebrow-light">A marketplace, not just an app</p><h2>How 1st Energy<br /><em>works.</em></h2><p className="dark-lead">We connect customers directly with approved gas and fuel vendors, so every order goes to someone ready to deliver it.</p><a className="button button-orange" href="#quote">Talk to our team <ArrowRight aria-hidden="true" /></a></div><div className="steps">{flowSteps.map((step, index) => <div className="step" key={step.title}><span>0{index + 1}</span><div><h3>{step.title}</h3><p>{step.description}</p></div></div>)}</div></div>
+      </section>
+
+      <section className="cta-section">
+        <div className="container cta-grid">
+          <div className="cta-card"><Truck className="cta-icon" aria-hidden="true" /><h3>Turn your vehicle into an opportunity</h3><p>Join 1st Energy as a driver and start earning by delivering gas and fuel in your area.</p><ul className="cta-list"><li><Check aria-hidden="true" /> Flexible working hours</li><li><Check aria-hidden="true" /> Weekly payouts</li><li><Check aria-hidden="true" /> Full driver support</li></ul><a className="button button-dark" href="#quote">Become a driver <ArrowRight aria-hidden="true" /></a></div>
+          <div className="cta-card"><Store className="cta-icon" aria-hidden="true" /><h3>Take your products to more customers</h3><p>List your gas, fuel or accessories on 1st Energy and reach customers across your region.</p><ul className="cta-list"><li><Check aria-hidden="true" /> Real-time orders</li><li><Check aria-hidden="true" /> Simple vendor dashboard</li><li><Check aria-hidden="true" /> Secure payouts</li></ul><a className="button button-dark" href="#quote">Become a vendor <ArrowRight aria-hidden="true" /></a></div>
+        </div>
+      </section>
+
+      <section className="coverage-section" id="coverage"><div className="container coverage-grid"><div><p className="eyebrow">Where we operate</p><h2>Local where it counts.<br /><em>Regional by design.</em></h2><p className="coverage-copy">A growing network across Southern Africa gives you one trusted partner, wherever the road takes you.</p><a className="text-link" href="#quote">Check your area <ArrowRight aria-hidden="true" /></a></div><div className="map-panel"><div className="map-lines" aria-hidden="true" /><div className="map-label"><span className="map-pin"><MapPin aria-hidden="true" /></span><div><strong>Southern Africa</strong><small>7 countries covered</small></div></div><div className="region-list">{regions.map((region, index) => <span key={region}><b>0{index + 1}</b>{region}</span>)}</div></div></div></section>
+
+      <section className="quote-section" id="quote"><div className="container quote-grid"><div><p className="eyebrow">Start a conversation</p><h2>Let&apos;s keep<br /><em>you moving.</em></h2><p>Tell us a little about what you need and one of our team will be in touch.</p><div className="contact-line"><Phone aria-hidden="true" /><a href="tel:+27870011234">087 001 1234</a><span>24/7 response line</span></div></div><form className="quote-form" onSubmit={(event) => { event.preventDefault(); setSubmitted(true) }}>{submitted ? <div className="success-state"><div><Check aria-hidden="true" /></div><h3>Thanks, we&apos;ll be in touch.</h3><p>Your request is with our team. We&apos;ll get back to you shortly.</p><button className="text-link" type="button" onClick={() => setSubmitted(false)}>Send another request <ArrowRight aria-hidden="true" /></button></div> : <><label>Your name<input required name="name" placeholder="e.g. Thabo Mokoena" /></label><label>Work email<input required type="email" name="email" placeholder="you@company.com" /></label><label>What can we help with?<select name="service" defaultValue=""><option value="" disabled>Select a service</option><option>Fuel delivery</option><option>LP gas</option><option>Roadside assistance</option><option>Commercial supply</option></select></label><button className="button button-dark" type="submit">Send request <ArrowRight aria-hidden="true" /></button></>}</form></div></section>
+
+      <footer className="site-footer" id="about">
+        <div className="container footer-cta"><div><h2>Your energy.<br /><em>Your location. Your delivery.</em></h2></div><div className="app-badges" id="playstore"><a className="badge" href="#"><PlayStoreIcon /><span><small>Get it on</small><strong>Google Play</strong></span></a><a className="badge" href="#"><Smartphone aria-hidden="true" /><span><small>Download on the</small><strong>App Store</strong></span></a></div></div>
+        <div className="container footer-top"><a className="brand brand-light" href="#top"><span className="brand-lockup"><img src="/icon.svg" alt="" className="brand-logo brand-mark-image" /><span>1st Energy</span></span></a><p>Fuel &amp; gas delivered.<br />When you need it.</p><div className="footer-links"><a href="#services">Services</a><a href="#coverage">Coverage</a><a href="#quote">Contact</a></div></div>
+        <div className="container footer-bottom"><span>© 2025 1st Energy. All rights reserved.</span><span>087 001 1234 · Fuel. Gas. Response.</span></div>
+      </footer>
+    </main>
+  )
+}
