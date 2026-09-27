@@ -243,3 +243,22 @@ a { color:inherit; text-decoration:none; }
 @media (max-width:800px){
   .footer-top{grid-template-columns:1fr}
 }
+
+/* --- top cover banner --- */
+.top-banner{position:relative;width:100%;overflow:hidden;height:52px;display:flex;align-items:center;color:#fff}
+.top-banner-bg{position:absolute;inset:0;background-image:linear-gradient(90deg,rgba(23,33,38,.88),rgba(23,33,38,.55) 55%,rgba(242,107,53,.35)),url(/hero-fuel-tanker.png);background-size:cover;background-position:center 35%;}
+.top-banner-inner{position:relative;width:100%;display:flex;align-items:center;justify-content:center;gap:18px;padding:0 44px;flex-wrap:wrap}
+.top-banner-text{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:.02em;white-space:nowrap}
+.top-banner-text svg{width:14px;height:14px;color:var(--orange)}
+.top-banner-cta{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--orange);white-space:nowrap;transition:transform .25s ease}
+.top-banner-cta:hover{transform:translateX(3px)}
+.top-banner-cta svg{width:13px;height:13px}
+.top-banner-close{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.12);border:0;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s ease}
+.top-banner-close:hover{background:rgba(255,255,255,.28)}
+.top-banner-close svg{width:12px;height:12px}
+@media (max-width:640px){
+  .top-banner{height:64px}
+  .top-banner-inner{padding:0 40px;gap:6px 12px}
+  .top-banner-text{white-space:normal;font-size:10px;text-align:center}
+  .top-banner-cta{font-size:9px}
+}

@@ -110,6 +110,7 @@ function PlayStoreIcon() {
 export default function Page() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [showBanner, setShowBanner] = useState(true)
 
   useEffect(() => {
     const revealEls = Array.from(document.querySelectorAll('.reveal'))
@@ -131,6 +132,16 @@ export default function Page() {
 
   return (
     <main>
+      {showBanner && (
+        <div className="top-banner">
+          <div className="top-banner-bg" aria-hidden="true" />
+          <div className="top-banner-inner">
+            <span className="top-banner-text"><Flame aria-hidden="true" /> Fuel &amp; LPG delivered straight to your door — order in minutes.</span>
+            <a className="top-banner-cta" href="#playstore">Get the app <ArrowRight aria-hidden="true" /></a>
+          </div>
+          <button className="top-banner-close" aria-label="Dismiss banner" onClick={() => setShowBanner(false)}><X aria-hidden="true" /></button>
+        </div>
+      )}
       <header className="site-header">
         <div className="container header-inner">
           <a href="#top" className="brand" aria-label="1st Energy home">
