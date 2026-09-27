@@ -190,3 +190,56 @@ a { color:inherit; text-decoration:none; }
 @media (max-width:800px) { .products-grid{grid-template-columns:1fr 1fr}.order-steps{grid-template-columns:1fr 1fr}.footer-cta{flex-direction:column;align-items:flex-start} }
 @media (max-width:800px) { .container{width:min(100% - 36px,600px)} .main-nav{display:none; position:absolute; left:0; right:0; top:82px; padding:24px 18px; background:var(--cream); flex-direction:column; border-bottom:1px solid var(--line); margin:0}.main-nav.is-open{display:flex}.header-actions .phone-link,.header-cta{display:none}.menu-toggle{display:block}.hero{padding:55px 0 25px}.hero-inner,.dark-grid,.coverage-grid,.quote-grid{grid-template-columns:1fr;gap:50px}.hero-foot{margin-top:45px;gap:18px;flex-direction:column}.service-intro,.coverage-section,.quote-section{padding:75px 0}.section-heading{display:block}.section-heading>p{margin-top:25px}.service-grid{grid-template-columns:1fr}.dark-section{padding:75px 0}.footer-top{grid-template-columns:1fr;gap:18px}.footer-links{justify-content:flex-start}.footer-bottom{gap:15px;flex-direction:column}.location-card{margin-left:0} }
 @media (min-width:801px) { .mobile-cta{display:none} }
+
+/* --- animation & motion additions --- */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);will-change:opacity,transform}
+  .reveal.is-visible{opacity:1;transform:none}
+
+  @keyframes heroFadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+  .hero-anim{opacity:0;animation:heroFadeUp .8s cubic-bezier(.16,1,.3,1) forwards}
+
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+  .float-slow{animation:floaty 6s ease-in-out infinite}
+  .float-slow-delayed{animation:floaty 6s ease-in-out infinite;animation-delay:1.2s}
+
+  @keyframes pulseRing{0%{box-shadow:0 0 0 0 rgba(242,107,53,.45)}70%{box-shadow:0 0 0 10px rgba(242,107,53,0)}100%{box-shadow:0 0 0 0 rgba(242,107,53,0)}}
+  .pulse-ring{border-radius:50%;animation:pulseRing 2.2s ease-out infinite}
+
+  @keyframes livePulse{0%{box-shadow:0 0 0 0 rgba(75,189,121,.55)}70%{box-shadow:0 0 0 9px rgba(75,189,121,0)}100%{box-shadow:0 0 0 0 rgba(75,189,121,0)}}
+  .live-dot{animation:livePulse 1.9s ease-out infinite}
+
+  .feature-icon,.service-icon,.product-icon,.cta-icon,.order-step-icon{transition:transform .35s cubic-bezier(.16,1,.3,1)}
+  .feature-card:hover .feature-icon,.service-card:hover .service-icon,.product-card:hover .product-icon,.cta-card:hover .cta-icon,.order-step:hover .order-step-icon{transform:translateY(-3px) scale(1.12) rotate(-4deg)}
+
+  .service-card,.feature-card,.product-card,.cta-card,.order-step,.step{transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s ease,background-color .35s ease}
+  .service-card:hover,.feature-card:hover,.product-card:hover{transform:translateY(-5px);box-shadow:0 18px 40px rgba(23,33,38,.08)}
+  .cta-card:hover{transform:translateY(-5px)}
+
+  .button{transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .25s ease,opacity .25s ease}
+  .button:hover{transform:translateY(-2px)}
+  .button-orange:hover{box-shadow:0 10px 26px rgba(242,107,53,.35)}
+  .button-dark:hover{box-shadow:0 10px 26px rgba(23,33,38,.28)}
+
+  .text-link span{transition:transform .25s ease;display:inline-block}
+  .text-link:hover span{transform:translateX(4px)}
+
+  .brand-logo{transition:transform .4s cubic-bezier(.16,1,.3,1)}
+  .brand:hover .brand-logo{transform:rotate(18deg)}
+
+  .location-card{transition:transform .3s ease,box-shadow .3s ease}
+  .location-card:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(38,53,45,.14)}
+}
+
+.footer-contact{display:grid;gap:10px;font-size:12px;color:#a9b3b2}
+.footer-contact a{display:flex;align-items:center;gap:8px;transition:color .25s ease}
+.footer-contact a:hover{color:var(--orange)}
+.footer-contact svg{width:14px;height:14px;color:var(--orange);flex-shrink:0}
+
+.contact-line{margin-top:14px}
+.contact-line a{transition:color .25s ease}
+.contact-line a:hover{color:var(--orange)}
+
+@media (max-width:800px){
+  .footer-top{grid-template-columns:1fr}
+}

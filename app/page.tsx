@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   ArrowRight,
   Check,
@@ -10,6 +10,7 @@ import {
   Headphones,
   Menu,
   MapPin,
+  Mail,
   Navigation,
   Phone,
   ShieldCheck,
@@ -25,7 +26,14 @@ import {
   Route,
   PackageCheck,
   Store,
+  Globe,
 } from 'lucide-react'
+
+const CONTACT_PHONE_DISPLAY = '+267 77 346 071'
+const CONTACT_PHONE_TEL = 'tel:+26777346071'
+const CONTACT_EMAIL = '1energyleano@gmail.com'
+const CONTACT_WEBSITE_DISPLAY = '1stenergyapp.com'
+const CONTACT_WEBSITE_URL = 'https://1stenergyapp.com'
 
 const services = [
   {
@@ -103,6 +111,24 @@ export default function Page() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [submitted, setSubmitted] = useState(false)
 
+  useEffect(() => {
+    const revealEls = Array.from(document.querySelectorAll('.reveal'))
+    if (!revealEls.length) return
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible')
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+    )
+    revealEls.forEach((el) => observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <main>
       <header className="site-header">
@@ -118,7 +144,7 @@ export default function Page() {
             <a className="mobile-cta" href="/operations" onClick={() => setMenuOpen(false)}>Operations <ArrowRight aria-hidden="true" /></a>
           </nav>
           <div className="header-actions">
-            <a className="phone-link" href="tel:+27870011234"><Phone aria-hidden="true" /> 087 001 1234</a>
+            <a className="phone-link" href={CONTACT_PHONE_TEL}><Phone aria-hidden="true" /> {CONTACT_PHONE_DISPLAY}</a>
             <a className="button button-dark header-cta" href="/operations">Operations <ArrowRight aria-hidden="true" /></a>
             <button className="menu-toggle" aria-label={menuOpen ? 'Close menu' : 'Open menu'} onClick={() => setMenuOpen(!menuOpen)}>
               {menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
@@ -131,25 +157,25 @@ export default function Page() {
         <div className="hero-grid" aria-hidden="true" />
         <div className="container hero-inner">
           <div className="hero-copy">
-            <p className="eyebrow"><span className="eyebrow-line" /> Fuel &amp; gas delivery app</p>
-            <h1>Fuel &amp; gas delivered.<br /><em>When you</em> need it.</h1>
-            <p className="hero-lead">Your trusted marketplace for LP gas, fuel and emergency delivery — ordered from your phone, delivered to your door.</p>
-            <div className="hero-actions">
+            <p className="eyebrow hero-anim" style={{ animationDelay: '0ms' }}><span className="eyebrow-line" /> Fuel &amp; gas delivery app</p>
+            <h1 className="hero-anim" style={{ animationDelay: '80ms' }}>Fuel &amp; gas delivered.<br /><em>When you</em> need it.</h1>
+            <p className="hero-lead hero-anim" style={{ animationDelay: '160ms' }}>Your trusted marketplace for LP gas, fuel and emergency delivery — ordered from your phone, delivered to your door.</p>
+            <div className="hero-actions hero-anim" style={{ animationDelay: '240ms' }}>
               <a className="button button-orange" href="#playstore"><PlayStoreIcon /> Get it on Playstore</a>
               <a className="text-link" href="#how-it-works">How it works <span>↗</span></a>
             </div>
-            <div className="trust-row">
+            <div className="trust-row hero-anim" style={{ animationDelay: '320ms' }}>
               <span><ShieldCheck aria-hidden="true" /> Verified suppliers</span>
               <span><Clock3 aria-hidden="true" /> 24/7 response</span>
               <span><MapPin aria-hidden="true" /> 7 countries</span>
             </div>
           </div>
-          <div className="hero-visual">
-            <div className="visual-frame">
+          <div className="hero-visual hero-anim" style={{ animationDelay: '200ms' }}>
+            <div className="visual-frame float-slow">
               <div className="visual-photo" role="img" aria-label="Fuel tanker travelling through the Southern African landscape" />
               <div className="visual-caption"><span>01</span><span>Built for the long haul</span></div>
             </div>
-            <div className="location-card"><span className="live-dot" /><div><strong>Live in 7 countries</strong><small>Southern Africa, connected</small></div><ArrowRight aria-hidden="true" /></div>
+            <div className="location-card float-slow-delayed"><span className="live-dot" /><div><strong>Live in 7 countries</strong><small>Southern Africa, connected</small></div><ArrowRight aria-hidden="true" /></div>
           </div>
         </div>
         <div className="container hero-foot"><span>Trusted by households, businesses and drivers who can&apos;t afford to stop.</span><span className="scroll-note">Scroll to explore <span>↓</span></span></div>
@@ -157,43 +183,43 @@ export default function Page() {
 
       <section className="feature-section" id="why-us">
         <div className="container section-heading"><div><p className="eyebrow">Why choose 1st Energy</p><h2>Simple. Fast.<br /><em>Reliable.</em></h2></div><p>No more waiting in line or running out at the worst moment — order gas or fuel delivery straight from the app, wherever you are.</p></div>
-        <div className="container feature-grid">{whyChoose.map(({ icon: Icon, title, description }) => <div className="feature-card" key={title}><Icon className="feature-icon" aria-hidden="true" /><h3>{title}</h3><p>{description}</p></div>)}</div>
+        <div className="container feature-grid">{whyChoose.map(({ icon: Icon, title, description }, index) => <div className="feature-card reveal" style={{ transitionDelay: `${(index % 3) * 90}ms` }} key={title}><Icon className="feature-icon" aria-hidden="true" /><h3>{title}</h3><p>{description}</p></div>)}</div>
       </section>
 
       <section className="service-intro" id="services">
         <div className="container section-heading"><div><p className="eyebrow">Our services</p><h2>More than just delivery.</h2></div><p>1st Energy connects you with approved suppliers and drivers for gas, fuel and emergency services.</p></div>
-        <div className="container service-grid">{services.map(({ icon: Icon, title, description, link }, index) => <article className="service-card" key={title}><div className="service-number">0{index + 1}</div><Icon className="service-icon" aria-hidden="true" /><h3>{title}</h3><p>{description}</p><a href="#quote">{link} <ArrowRight aria-hidden="true" /></a></article>)}</div>
+        <div className="container service-grid">{services.map(({ icon: Icon, title, description, link }, index) => <article className="service-card reveal" style={{ transitionDelay: `${index * 100}ms` }} key={title}><div className="service-number">0{index + 1}</div><Icon className="service-icon" aria-hidden="true" /><h3>{title}</h3><p>{description}</p><a href="#quote">{link} <ArrowRight aria-hidden="true" /></a></article>)}</div>
       </section>
 
       <section className="products-section">
         <div className="container section-heading"><div><p className="eyebrow">Our products</p><h2>Everything you need,<br /><em>in one place.</em></h2></div><p>From cooking gas to fuel and accessories, 1st Energy gives you access to a wide range of energy products from trusted sellers.</p></div>
-        <div className="container products-grid">{products.map(({ icon: Icon, name, tagline }) => <div className="product-card" key={name}><Icon className="product-icon" aria-hidden="true" /><h3>{name}</h3><span>{tagline}</span></div>)}</div>
+        <div className="container products-grid">{products.map(({ icon: Icon, name, tagline }, index) => <div className="product-card reveal" style={{ transitionDelay: `${index * 90}ms` }} key={name}><Icon className="product-icon" aria-hidden="true" /><h3>{name}</h3><span>{tagline}</span></div>)}</div>
       </section>
 
       <section className="order-section" id="how-it-works"><span id="operations" className="section-anchor" aria-hidden="true" />
         <div className="container section-heading light"><div><p className="eyebrow eyebrow-light">How to order</p><h2>From your phone<br /><em>to your door.</em></h2></div><p className="order-copy">Ordering is simple and quick, just a few taps to get your energy on the way.</p></div>
-        <div className="container order-steps">{orderSteps.map(({ icon: Icon, title, description }, index) => <div className="order-step" key={title}><span className="order-step-number">0{index + 1}</span><Icon className="order-step-icon" aria-hidden="true" /><h3>{title}</h3><p>{description}</p></div>)}</div>
+        <div className="container order-steps">{orderSteps.map(({ icon: Icon, title, description }, index) => <div className="order-step reveal" style={{ transitionDelay: `${index * 90}ms` }} key={title}><span className="order-step-number">0{index + 1}</span><Icon className="order-step-icon" aria-hidden="true" /><h3>{title}</h3><p>{description}</p></div>)}</div>
       </section>
 
       <section className="dark-section">
-        <div className="container dark-grid"><div><p className="eyebrow eyebrow-light">A marketplace, not just an app</p><h2>How 1st Energy<br /><em>works.</em></h2><p className="dark-lead">We connect customers directly with approved gas and fuel vendors, so every order goes to someone ready to deliver it.</p><a className="button button-orange" href="#quote">Talk to our team <ArrowRight aria-hidden="true" /></a></div><div className="steps">{flowSteps.map((step, index) => <div className="step" key={step.title}><span>0{index + 1}</span><div><h3>{step.title}</h3><p>{step.description}</p></div></div>)}</div></div>
+        <div className="container dark-grid"><div><p className="eyebrow eyebrow-light">A marketplace, not just an app</p><h2>How 1st Energy<br /><em>works.</em></h2><p className="dark-lead">We connect customers directly with approved gas and fuel vendors, so every order goes to someone ready to deliver it.</p><a className="button button-orange" href="#quote">Talk to our team <ArrowRight aria-hidden="true" /></a></div><div className="steps">{flowSteps.map((step, index) => <div className="step reveal" style={{ transitionDelay: `${index * 90}ms` }} key={step.title}><span>0{index + 1}</span><div><h3>{step.title}</h3><p>{step.description}</p></div></div>)}</div></div>
       </section>
 
       <section className="cta-section">
         <div className="container cta-grid">
-          <div className="cta-card"><Truck className="cta-icon" aria-hidden="true" /><h3>Turn your vehicle into an opportunity</h3><p>Join 1st Energy as a driver and start earning by delivering gas and fuel in your area.</p><ul className="cta-list"><li><Check aria-hidden="true" /> Flexible working hours</li><li><Check aria-hidden="true" /> Weekly payouts</li><li><Check aria-hidden="true" /> Full driver support</li></ul><a className="button button-dark" href="#quote">Become a driver <ArrowRight aria-hidden="true" /></a></div>
-          <div className="cta-card"><Store className="cta-icon" aria-hidden="true" /><h3>Take your products to more customers</h3><p>List your gas, fuel or accessories on 1st Energy and reach customers across your region.</p><ul className="cta-list"><li><Check aria-hidden="true" /> Real-time orders</li><li><Check aria-hidden="true" /> Simple vendor dashboard</li><li><Check aria-hidden="true" /> Secure payouts</li></ul><a className="button button-dark" href="#quote">Become a vendor <ArrowRight aria-hidden="true" /></a></div>
+          <div className="cta-card reveal"><Truck className="cta-icon" aria-hidden="true" /><h3>Turn your vehicle into an opportunity</h3><p>Join 1st Energy as a driver and start earning by delivering gas and fuel in your area.</p><ul className="cta-list"><li><Check aria-hidden="true" /> Flexible working hours</li><li><Check aria-hidden="true" /> Weekly payouts</li><li><Check aria-hidden="true" /> Full driver support</li></ul><a className="button button-dark" href="#quote">Become a driver <ArrowRight aria-hidden="true" /></a></div>
+          <div className="cta-card reveal" style={{ transitionDelay: '100ms' }}><Store className="cta-icon" aria-hidden="true" /><h3>Take your products to more customers</h3><p>List your gas, fuel or accessories on 1st Energy and reach customers across your region.</p><ul className="cta-list"><li><Check aria-hidden="true" /> Real-time orders</li><li><Check aria-hidden="true" /> Simple vendor dashboard</li><li><Check aria-hidden="true" /> Secure payouts</li></ul><a className="button button-dark" href="#quote">Become a vendor <ArrowRight aria-hidden="true" /></a></div>
         </div>
       </section>
 
-      <section className="coverage-section" id="coverage"><div className="container coverage-grid"><div><p className="eyebrow">Where we operate</p><h2>Local where it counts.<br /><em>Regional by design.</em></h2><p className="coverage-copy">A growing network across Southern Africa gives you one trusted partner, wherever the road takes you.</p><a className="text-link" href="#quote">Check your area <ArrowRight aria-hidden="true" /></a></div><div className="map-panel"><div className="map-lines" aria-hidden="true" /><div className="map-label"><span className="map-pin"><MapPin aria-hidden="true" /></span><div><strong>Southern Africa</strong><small>7 countries covered</small></div></div><div className="region-list">{regions.map((region, index) => <span key={region}><b>0{index + 1}</b>{region}</span>)}</div></div></div></section>
+      <section className="coverage-section" id="coverage"><div className="container coverage-grid"><div className="reveal"><p className="eyebrow">Where we operate</p><h2>Local where it counts.<br /><em>Regional by design.</em></h2><p className="coverage-copy">A growing network across Southern Africa gives you one trusted partner, wherever the road takes you.</p><a className="text-link" href="#quote">Check your area <ArrowRight aria-hidden="true" /></a></div><div className="map-panel reveal"><div className="map-lines" aria-hidden="true" /><div className="map-label"><span className="map-pin pulse-ring"><MapPin aria-hidden="true" /></span><div><strong>Southern Africa</strong><small>7 countries covered</small></div></div><div className="region-list">{regions.map((region, index) => <span key={region}><b>0{index + 1}</b>{region}</span>)}</div></div></div></section>
 
-      <section className="quote-section" id="quote"><div className="container quote-grid"><div><p className="eyebrow">Start a conversation</p><h2>Let&apos;s keep<br /><em>you moving.</em></h2><p>Tell us a little about what you need and one of our team will be in touch.</p><div className="contact-line"><Phone aria-hidden="true" /><a href="tel:+27870011234">087 001 1234</a><span>24/7 response line</span></div></div><form className="quote-form" onSubmit={(event) => { event.preventDefault(); setSubmitted(true) }}>{submitted ? <div className="success-state"><div><Check aria-hidden="true" /></div><h3>Thanks, we&apos;ll be in touch.</h3><p>Your request is with our team. We&apos;ll get back to you shortly.</p><button className="text-link" type="button" onClick={() => setSubmitted(false)}>Send another request <ArrowRight aria-hidden="true" /></button></div> : <><label>Your name<input required name="name" placeholder="e.g. Thabo Mokoena" /></label><label>Work email<input required type="email" name="email" placeholder="you@company.com" /></label><label>What can we help with?<select name="service" defaultValue=""><option value="" disabled>Select a service</option><option>Fuel delivery</option><option>LP gas</option><option>Roadside assistance</option><option>Commercial supply</option></select></label><button className="button button-dark" type="submit">Send request <ArrowRight aria-hidden="true" /></button></>}</form></div></section>
+      <section className="quote-section" id="quote"><div className="container quote-grid"><div className="reveal"><p className="eyebrow">Start a conversation</p><h2>Let&apos;s keep<br /><em>you moving.</em></h2><p>Tell us a little about what you need and one of our team will be in touch.</p><div className="contact-line"><Phone aria-hidden="true" /><a href={CONTACT_PHONE_TEL}>{CONTACT_PHONE_DISPLAY}</a><span>24/7 response line</span></div><div className="contact-line"><Mail aria-hidden="true" /><a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></div><div className="contact-line"><Globe aria-hidden="true" /><a href={CONTACT_WEBSITE_URL} target="_blank" rel="noreferrer">{CONTACT_WEBSITE_DISPLAY}</a></div></div><form className="quote-form reveal" onSubmit={(event) => { event.preventDefault(); setSubmitted(true) }}>{submitted ? <div className="success-state"><div><Check aria-hidden="true" /></div><h3>Thanks, we&apos;ll be in touch.</h3><p>Your request is with our team. We&apos;ll get back to you shortly.</p><button className="text-link" type="button" onClick={() => setSubmitted(false)}>Send another request <ArrowRight aria-hidden="true" /></button></div> : <><label>Your name<input required name="name" placeholder="e.g. Thabo Mokoena" /></label><label>Work email<input required type="email" name="email" placeholder="you@company.com" /></label><label>What can we help with?<select name="service" defaultValue=""><option value="" disabled>Select a service</option><option>Fuel delivery</option><option>LP gas</option><option>Roadside assistance</option><option>Commercial supply</option></select></label><button className="button button-dark" type="submit">Send request <ArrowRight aria-hidden="true" /></button></>}</form></div></section>
 
       <footer className="site-footer" id="about">
         <div className="container footer-cta"><div><h2>Your energy.<br /><em>Your location. Your delivery.</em></h2></div><div className="app-badges" id="playstore"><a className="badge" href="#"><PlayStoreIcon /><span><small>Get it on</small><strong>Google Play</strong></span></a><a className="badge" href="#"><Smartphone aria-hidden="true" /><span><small>Download on the</small><strong>App Store</strong></span></a></div></div>
-        <div className="container footer-top"><a className="brand brand-light" href="#top"><span className="brand-lockup"><img src="/icon.svg" alt="" className="brand-logo brand-mark-image" /><span>1st Energy</span></span></a><p>Fuel &amp; gas delivered.<br />When you need it.</p><div className="footer-links"><a href="#services">Services</a><a href="#coverage">Coverage</a><a href="#quote">Contact</a></div></div>
-        <div className="container footer-bottom"><span>© 2025 1st Energy. All rights reserved.</span><span>087 001 1234 · Fuel. Gas. Response.</span></div>
+        <div className="container footer-top"><div><a className="brand brand-light" href="#top"><span className="brand-lockup"><img src="/icon.svg" alt="" className="brand-logo brand-mark-image" /><span>1st Energy</span></span></a><p>Fuel &amp; gas delivered.<br />When you need it.</p></div><div className="footer-contact"><a href={CONTACT_PHONE_TEL}><Phone aria-hidden="true" /> {CONTACT_PHONE_DISPLAY}</a><a href={`mailto:${CONTACT_EMAIL}`}><Mail aria-hidden="true" /> {CONTACT_EMAIL}</a><a href={CONTACT_WEBSITE_URL} target="_blank" rel="noreferrer"><Globe aria-hidden="true" /> {CONTACT_WEBSITE_DISPLAY}</a></div><div className="footer-links"><a href="#services">Services</a><a href="#coverage">Coverage</a><a href="#quote">Contact</a></div></div>
+        <div className="container footer-bottom"><span>© 2025 1st Energy. All rights reserved.</span><span>{CONTACT_PHONE_DISPLAY} · Fuel. Gas. Response.</span></div>
       </footer>
     </main>
   )
