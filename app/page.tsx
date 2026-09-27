@@ -105,6 +105,7 @@ const heroSlides = [
     cta: 'Order now',
     href: '#services',
     caption: 'Never run dry again',
+    tags: ['Fast dispatch', 'Cash or card'],
   },
   {
     tone: 'dark',
@@ -116,6 +117,7 @@ const heroSlides = [
     cta: 'Order now',
     href: '#services',
     caption: '24/7 emergency response',
+    tags: ['Live tracking', 'Round the clock'],
   },
   {
     tone: 'green',
@@ -127,6 +129,7 @@ const heroSlides = [
     cta: 'Download the app',
     href: '#playstore',
     caption: 'Now recruiting drivers',
+    tags: ['Flexible hours', 'Weekly payouts'],
   },
 ]
 
@@ -159,7 +162,7 @@ export default function Page() {
     if (slidePaused) return
     const timer = setInterval(() => {
       setActiveSlide((current) => (current + 1) % heroSlides.length)
-    }, 4800)
+    }, 4000)
     return () => clearInterval(timer)
   }, [slidePaused])
 
@@ -261,11 +264,15 @@ export default function Page() {
                       className={`hero-slide hero-slide-promo tone-${slide.tone} ${isActive ? 'is-active' : ''}`}
                       aria-hidden={!isActive}
                     >
-                      <Icon className="hero-slide-icon" aria-hidden="true" />
+                      <span className="hero-slide-pattern" aria-hidden="true" />
+                      <span className="hero-slide-ghost-number" aria-hidden="true">{slide.number}</span>
+                      <span className="hero-slide-glow" aria-hidden="true" />
                       <div className="hero-slide-copy">
+                        <span className="hero-slide-icon-badge"><Icon className="hero-slide-icon" aria-hidden="true" /></span>
                         <span className="hero-slide-eyebrow">{slide.eyebrow}</span>
                         <h3>{slide.headline}</h3>
                         <p>{slide.sub}</p>
+                        <div className="hero-slide-tags">{slide.tags?.map((tag) => <span key={tag}>{tag}</span>)}</div>
                         <a className="hero-slide-cta" href={slide.href}>{slide.cta} <ArrowRight aria-hidden="true" /></a>
                       </div>
                     </div>
