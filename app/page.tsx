@@ -447,14 +447,6 @@ export default function Page() {
         <div className="container feature-grid">{whyChoose.map(({ icon: Icon, title, description }, index) => <div className="feature-card reveal" style={{ transitionDelay: `${(index % 3) * 90}ms` }} key={title}><Icon className="feature-icon" aria-hidden="true" /><h3>{title}</h3><p>{description}</p></div>)}</div>
       </section>
 
-      <section className="photo-band reveal">
-        <div className="photo-band-image" role="img" aria-label="1st Energy fuel tanker on the road in Southern Africa" />
-        <div className="container photo-band-inner">
-          <span className="photo-band-tag"><Truck aria-hidden="true" /> On the road, every day</span>
-          <p>Our fleet keeps moving across Southern Africa so your delivery arrives when you need it — not when it's convenient for us.</p>
-        </div>
-      </section>
-
       <section className="service-intro" id="services">
         <div className="container"><a className="services-banner" href="#playstore" aria-label="Get the 1st Energy app"><img src="/services-banner.jpg" alt="Fuel and gas delivered when you need it: driver refuelling a car at night" loading="lazy" /></a></div>
         <div className="container section-heading"><div><p className="eyebrow">Our services</p><h2>More than just delivery.</h2></div><p>1st Energy connects you with approved suppliers and drivers for gas, fuel and emergency services.</p></div>
